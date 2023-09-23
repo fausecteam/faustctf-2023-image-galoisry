@@ -1,0 +1,24 @@
+# Human-readable name of the service
+name: image-galoisry
+slug: image-galoisry
+authors:
+  - Maxim Grüninger <maxim.grueninger@fau.de>
+  - Benjamin Haag <benny.haag@fau.de>
+  - Daniel Tenbrinck <daniel.tenbrinck@fau.de>
+
+install:
+  container_images:
+    - faust.cs.fau.de:5000/image-galoisry
+    - faust.cs.fau.de:5000/image-galoisry-deps
+    - mongo:4.4.6
+
+checker:
+  script_path: checker/mychecker.py
+  # Upper bound of how long the Checker Script takes to run (for a single team)
+  # Used for scheduling checks within a tick, executions taking longer *may* get terminated
+  max_duration: 60
+  debian_packages:
+    - python3-requests
+    - python3-numpy
+    - fonts-open-sans
+  pip_packages: []
